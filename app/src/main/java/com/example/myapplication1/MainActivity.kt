@@ -1,11 +1,11 @@
 package com.example.myapplication1
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 
@@ -22,7 +22,6 @@ class MainActivity : AppCompatActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle("Alert dialog")
             builder.setMessage(this.lifecycle.currentState.toString())
-//builder.setPositiveButton("OK", DialogInterface.OnClickListener(function = x))
 
             builder.setPositiveButton("OK") { dialog, which ->
                 tv!!.text = this.lifecycle.currentState.toString()
@@ -30,6 +29,10 @@ class MainActivity : AppCompatActivity() {
 
             builder.show()
             tv!!.text = this.lifecycle.currentState.toString()
+
+            val intent = Intent(baseContext, MainActivity2::class.java)
+
+            startActivity(intent)
         })
         getState("onCreate")
     }
@@ -63,7 +66,7 @@ class MainActivity : AppCompatActivity() {
         super.onDestroy()
         getState("onDestroy")
     }
-    fun getState(msg:String){
+    fun getState(msg: String){
         Log.i("state_info", msg)
         Log.i("state_info", this.lifecycle.currentState.toString())
         tv!!.text = this.lifecycle.currentState.toString()
